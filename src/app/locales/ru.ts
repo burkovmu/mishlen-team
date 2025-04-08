@@ -136,7 +136,7 @@ export const ru = {
       ],
       contactDetails: 'Контакты',
       emailPlaceholder: 'your@email.com',
-      phonePlaceholder: '(999) 999-99-99',
+      phonePlaceholder: '+7 (999) 999-99-99',
       project: 'О вашем проекте',
       projectPlaceholder: 'Расскажите о ваших целях, задачах и ожиданиях от проекта',
       submit: 'Отправить заявку'
