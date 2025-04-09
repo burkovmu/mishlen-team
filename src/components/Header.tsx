@@ -45,7 +45,7 @@ export default function Header() {
         {/* Логотип */}
         <Link href="/" className="z-20">
           <div
-            className="text-[#feda6a] text-3xl tracking-wider font-marvel flex items-center pt-1"
+            className="text-[#feda6a] text-2xl tracking-wider font-marvel flex items-center pt-2"
             style={{
               textShadow: '0 0 15px rgba(254, 218, 106, 0.3)'
             }}
