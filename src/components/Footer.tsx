@@ -10,10 +10,9 @@ export default function Footer() {
   const { footer } = translations;
 
   const socialLinks = [
-    { name: 'Telegram', url: 'https://t.me/mishlenteam' },
-    { name: 'WhatsApp', url: 'https://wa.me/message/YWPQD6DCDXBPA1' },
-    { name: 'Instagram', url: '#' },
-    { name: 'GitHub', url: 'https://github.com/burkovmu' }
+    { name: 'Telegram', url: 'https://t.me/wawaw' },
+    { name: 'WhatsApp', url: 'https://wa.me/message/AILBYLNAH7NKH1' },
+    { name: 'Instagram', url: 'https://www.instagram.com/iamburkov' }
   ];
 
   // Получаем ссылки навигации из переводов
