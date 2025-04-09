@@ -4,10 +4,76 @@ import { motion } from 'framer-motion';
 import SectionWrapper from './SectionWrapper';
 import AnimatedBackground from './AnimatedBackground';
 import { useLocale } from '../app/context/LocaleContext';
+import { useState } from 'react';
 
 const ContactSection = () => {
   const { translations } = useLocale();
   const { contactSection } = translations;
+
+  // Состояние для полей формы
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    projectType: '',
+    budget: '',
+    email: '',
+    phone: '',
+    project: ''
+  });
+
+  // Обработчик изменения полей
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Обработчик отправки формы
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: `
+Компания: ${formData.company}
+Тип проекта: ${formData.projectType}
+Бюджет: ${formData.budget}
+Телефон: ${formData.phone}
+О проекте: ${formData.project}
+          `
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке формы');
+      }
+
+      // Очищаем форму после успешной отправки
+      setFormData({
+        name: '',
+        company: '',
+        projectType: '',
+        budget: '',
+        email: '',
+        phone: '',
+        project: ''
+      });
+
+      alert('Заявка отправлена успешно!');
+    } catch (error) {
+      console.error('Ошибка:', error);
+      alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте позже.');
+    }
+  };
 
   // Используем переводы из контекста
   const projectTypes = contactSection.form.projectTypes;
@@ -21,19 +87,19 @@ const ContactSection = () => {
           {/* Верхняя часть с заголовком */}
           <div className="w-full py-16">
             <div className="container mx-auto px-4">
-            <motion.div
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+                transition={{ delay: 0.3 }}
                 className="text-center"
-            >
+              >
                 <h2 className="text-4xl lg:text-5xl font-bold text-[#feda6a] mb-6">
                   {contactSection.heading}
-              </h2>
+                </h2>
                 <p className="text-[#d4d4dc] text-lg max-w-2xl mx-auto">
                   {contactSection.description}
-              </p>
-            </motion.div>
+                </p>
+              </motion.div>
             </div>
           </div>
 
@@ -85,40 +151,50 @@ const ContactSection = () => {
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.5 }}
                   className="bg-[#393f4d]/10 p-8 rounded-[2px] backdrop-blur-sm border border-[#feda6a]/10 lg:col-span-2"
-            >
+                >
                   <h3 className="text-2xl font-bold text-[#feda6a] mb-8">{contactSection.form.title}</h3>
-                  <form className="space-y-8">
-              {/* Основная информация */}
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    {/* Основная информация */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
+                      <div className="space-y-2">
                         <label className="block text-[#feda6a] text-sm uppercase tracking-wider">{contactSection.form.name}</label>
-                  <input 
-                    type="text" 
+                        <input 
+                          type="text" 
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           placeholder={contactSection.form.namePlaceholder} 
                           className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] placeholder-[#d4d4dc]/30 border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
-                  />
-                </div>
-                <div className="space-y-2">
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
                         <label className="block text-[#feda6a] text-sm uppercase tracking-wider">{contactSection.form.company}</label>
-                  <input 
-                    type="text" 
+                        <input 
+                          type="text" 
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
                           placeholder={contactSection.form.companyPlaceholder} 
                           className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] placeholder-[#d4d4dc]/30 border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
-                  />
-                </div>
-              </div>
+                          required
+                        />
+                      </div>
+                    </div>
 
-              {/* Тип проекта */}
-              <div className="space-y-3">
+                    {/* Тип проекта */}
+                    <div className="space-y-3">
                       <label className="block text-[#feda6a] text-sm uppercase tracking-wider">{contactSection.form.projectType}</label>
                       {/* Мобильная версия (выпадающий список) */}
                       <div className="block md:hidden">
                         <select 
                           className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
                           name="projectType"
-                          defaultValue=""
+                          value={formData.projectType}
+                          onChange={handleChange}
+                          required
                         >
                           <option value="" disabled>Выберите тип проекта</option>
                           {projectTypes.map((type) => (
@@ -128,33 +204,39 @@ const ContactSection = () => {
                       </div>
                       {/* Десктопная версия (радио-кнопки) */}
                       <div className="hidden md:grid md:grid-cols-3 gap-3">
-                  {projectTypes.map((type) => (
-                    <label 
-                      key={type}
-                      className="relative group cursor-pointer"
-                    >
-                      <input 
-                        type="radio" 
-                        className="peer hidden" 
-                        name="projectType"
-                      />
+                        {projectTypes.map((type) => (
+                          <label 
+                            key={type}
+                            className="relative group cursor-pointer"
+                          >
+                            <input 
+                              type="radio" 
+                              className="peer hidden" 
+                              name="projectType"
+                              value={type}
+                              checked={formData.projectType === type}
+                              onChange={handleChange}
+                              required
+                            />
                             <div className="p-3 text-center bg-[#1d1e22]/50 border border-[#393f4d] text-[#d4d4dc] peer-checked:border-[#feda6a] peer-checked:text-[#feda6a] hover:border-[#feda6a] transition-colors rounded-[2px]">
-                        {type}
+                              {type}
+                            </div>
+                          </label>
+                        ))}
                       </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
+                    </div>
 
-              {/* Бюджет */}
-              <div className="space-y-3">
+                    {/* Бюджет */}
+                    <div className="space-y-3">
                       <label className="block text-[#feda6a] text-sm uppercase tracking-wider">{contactSection.form.budget}</label>
                       {/* Мобильная версия (выпадающий список) */}
                       <div className="block md:hidden">
                         <select 
                           className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
                           name="budget"
-                          defaultValue=""
+                          value={formData.budget}
+                          onChange={handleChange}
+                          required
                         >
                           <option value="" disabled>Выберите бюджет</option>
                           {budgets.map((budget) => (
@@ -164,59 +246,75 @@ const ContactSection = () => {
                       </div>
                       {/* Десктопная версия (радио-кнопки) */}
                       <div className="hidden md:grid md:grid-cols-2 gap-3">
-                  {budgets.map((budget) => (
-                    <label 
-                      key={budget}
-                      className="relative group cursor-pointer"
-                    >
-                      <input 
-                        type="radio" 
-                        className="peer hidden" 
-                        name="budget"
-                      />
+                        {budgets.map((budget) => (
+                          <label 
+                            key={budget}
+                            className="relative group cursor-pointer"
+                          >
+                            <input 
+                              type="radio" 
+                              className="peer hidden" 
+                              name="budget"
+                              value={budget}
+                              checked={formData.budget === budget}
+                              onChange={handleChange}
+                              required
+                            />
                             <div className="p-3 text-center bg-[#1d1e22]/50 border border-[#393f4d] text-[#d4d4dc] peer-checked:border-[#feda6a] peer-checked:text-[#feda6a] hover:border-[#feda6a] transition-colors rounded-[2px]">
-                        {budget}
+                              {budget}
+                            </div>
+                          </label>
+                        ))}
                       </div>
-                    </label>
-                  ))}
-                </div>
-              </div>
+                    </div>
 
                     {/* Контактные данные */}
                     <div>
                       <label className="block text-[#feda6a] text-sm uppercase tracking-wider mb-2">{contactSection.form.contactDetails}</label>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                  <input 
-                    type="email" 
+                          <input 
+                            type="email" 
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder={contactSection.form.emailPlaceholder} 
                             className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] placeholder-[#d4d4dc]/30 border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
-                  />
-                </div>
+                            required
+                          />
+                        </div>
                         <div>
-                    <input 
-                      type="tel" 
+                          <input 
+                            type="tel" 
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleChange}
                             placeholder={contactSection.form.phonePlaceholder} 
                             className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] placeholder-[#d4d4dc]/30 border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px]"
-                    />
-                  </div>
-                </div>
-              </div>
+                            required
+                          />
+                        </div>
+                      </div>
+                    </div>
 
                     {/* О проекте */}
-              <div className="space-y-2">
+                    <div className="space-y-2">
                       <label className="block text-[#feda6a] text-sm uppercase tracking-wider">{contactSection.form.project}</label>
-                <textarea 
+                      <textarea 
+                        name="project"
+                        value={formData.project}
+                        onChange={handleChange}
                         placeholder={contactSection.form.projectPlaceholder} 
                         rows={5}
                         className="w-full p-3 bg-[#1d1e22]/50 text-[#d4d4dc] placeholder-[#d4d4dc]/30 border border-[#393f4d] focus:border-[#feda6a] outline-none transition-colors rounded-[2px] resize-none"
-                ></textarea>
-              </div>
+                        required
+                      ></textarea>
+                    </div>
 
-              {/* Кнопка отправки */}
+                    {/* Кнопка отправки */}
                     <div className="pt-4">
                       <button
-                type="submit"
+                        type="submit"
                         className="w-full md:w-auto px-10 py-4 bg-[#feda6a] text-black font-bold rounded-[2px] hover:bg-[#feda6a]/90 transition-colors"
                       >
                         {contactSection.form.submit}
