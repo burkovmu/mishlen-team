@@ -34,3 +34,29 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Настройка интеграции с Telegram
+
+Для работы контактной формы необходимо настроить отправку сообщений в Telegram:
+
+1. Создайте бота через @BotFather в Telegram:
+   - Откройте Telegram
+   - Найдите @BotFather
+   - Отправьте команду `/newbot`
+   - Следуйте инструкциям для создания бота
+   - Сохраните полученный токен бота
+
+2. Получите chat_id:
+   - Отправьте сообщение вашему боту
+   - Откройте в браузере: `https://api.telegram.org/bot<ваш_токен>/getUpdates`
+   - В ответе найдите `chat.id`
+
+3. Создайте файл `.env.local` в корне проекта и добавьте в него:
+   ```
+   TELEGRAM_BOT_TOKEN=ваш_токен_бота
+   TELEGRAM_CHAT_ID=ваш_chat_id
+   ```
+
+4. Перезапустите сервер разработки
+
+После этого все заявки с контактной формы будут автоматически отправляться в указанный чат Telegram.
