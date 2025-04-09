@@ -50,7 +50,7 @@ export default function Header() {
               textShadow: '0 0 15px rgba(254, 218, 106, 0.3)'
             }}
           >
-            MISHLEN
+            MISHLEN TEAM
           </div>
         </Link>
 
