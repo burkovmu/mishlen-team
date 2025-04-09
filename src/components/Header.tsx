@@ -108,17 +108,18 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: '100vh' }}
             exit={{ opacity: 0, height: 0 }}
-            className="fixed inset-0 bg-[#1d1e22]/95 backdrop-blur-lg z-10"
+            className="fixed inset-0 bg-[#1d1e22]/98 backdrop-blur-lg z-10"
           >
-            <div className="container mx-auto px-4 pt-28 pb-10 h-full flex flex-col">
+            <div className="container mx-auto px-4 pt-16 pb-10 h-full flex flex-col">
               <nav className="flex-1 flex flex-col justify-center items-center">
-                <ul className="space-y-8 text-center">
+                <ul className="space-y-8 text-center w-full">
                   {navigationLinks.map((item, index) => (
                     <motion.li 
                       key={item.url}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 * index }}
+                      className="flex justify-center"
                     >
                       <Link 
                         href={item.url}
