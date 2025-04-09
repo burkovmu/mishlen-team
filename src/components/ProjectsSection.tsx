@@ -14,13 +14,13 @@ const projectsRu = [
     title: 'Аренда автомобилей в Дубае',
     description: 'Разработка современного веб-сайта для аренды автомобилей премиум-класса в Дубае с удобной системой бронирования и оплаты.',
     image: '/project1.jpg',
-    category: 'Web Development',
+    category: 'Rent Dubai',
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     link: '/projects/project1'
   },
   {
     id: 'project2',
-    title: 'Аренда СПЕЦТЕХНИКИ',
+    title: 'Аренда строительной техники',
     description: 'Создание специализированной платформы для аренды строительной и специальной техники с расширенным каталогом и системой управления заказами.',
     image: '/project2.jpg',
     category: 'УРАЛСПЕЦТЕХ',
@@ -32,16 +32,16 @@ const projectsRu = [
     title: 'Сервисный центр техники Apple',
     description: 'Разработка современного сайта для сервисного центра по ремонту техники Apple с системой отслеживания статуса ремонта.',
     image: '/project3.jpg',
-    category: 'Web App',
+    category: 'iSkill',
     technologies: ['React', 'Node.js', 'PostgreSQL', 'Express'],
     link: '/projects/project3'
   },
   {
     id: 'project4',
-    title: 'Сайт для ресторана',
+    title: 'Изысканная кухня и коктейли',
     description: 'Создание современного сайта для ресторана с системой онлайн-бронирования столиков и доставки еды.',
     image: '/project4.jpg',
-    category: 'Web Development',
+    category: 'UNSOBER BAR',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js'],
     link: '/projects/project4'
   },
@@ -50,7 +50,7 @@ const projectsRu = [
     title: 'Бенто торты на заказ',
     description: 'Разработка современного веб-сайта для компании по производству и продаже Бенто тортов с системой онлайн-заказа и доставки.',
     image: '/project5.jpg',
-    category: 'Web Development',
+    category: 'Bento Cakes',
     technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
     link: '/projects/project5'
   }
