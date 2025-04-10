@@ -280,7 +280,7 @@ const projectsEn = {
   'project1': {
     title: 'Car Rental in Dubai',
     description: 'Development of a modern website for premium car rental in Dubai with a convenient booking and payment system.',
-    url: 'https://dubai-cars.rent',
+    url: 'https://rent-car-dubai.vercel.app',
     fullDescription: `The project is a comprehensive solution for premium car rental in Dubai. 
     The website is designed with market specifics and customer needs in mind, providing a convenient interface for selecting and booking cars.
     
@@ -333,7 +333,7 @@ const projectsEn = {
   'project2': {
     title: 'Special Equipment Rental',
     description: 'Creating a specialized platform for construction and special equipment rental with an expanded catalog and order management system.',
-    url: 'https://spec-tech.rent',
+    url: 'https://specteh.vercel.app/',
     fullDescription: `The special equipment rental platform is designed with the specifics of the construction industry in mind. 
     The site provides a convenient interface for selecting and renting various types of special equipment, including excavators, bulldozers, and cranes.
     
@@ -386,7 +386,7 @@ const projectsEn = {
   'project3': {
     title: 'Apple Service Center',
     description: 'Development of a modern website for Apple equipment repair service center with repair status tracking system.',
-    url: 'https://apple-service.center',
+    url: 'https://iskill-service.vercel.app/',
     fullDescription: `The Apple service center website is designed for customer convenience and service operation optimization. 
     The platform provides the ability to track repair status, schedule diagnostics, and receive notifications about device readiness.
     
@@ -439,7 +439,7 @@ const projectsEn = {
   'project4': {
     title: 'Restaurant Website',
     description: 'Creating a modern restaurant website with online table reservation and food delivery systems.',
-    url: 'https://restaurant.example',
+    url: 'https://unsoberbar.vercel.app/',
     fullDescription: `The restaurant website is designed with current trends in the food service industry in mind. 
     The platform provides a convenient interface for menu browsing, table reservations, and food delivery ordering.
     
@@ -492,7 +492,7 @@ const projectsEn = {
   'project5': {
     title: 'Bento Cakes on Order',
     description: 'Development of a modern website for a company specializing in the production and sale of Bento cakes with an online order and delivery system.',
-    url: 'https://bento-cakes.ru',
+    url: 'https://bento-cakes.vercel.app/',
     fullDescription: `The project is a comprehensive solution for a company specializing in the production and sale of Bento cakes.
     The website is designed with the specifics of the confectionery business and customer needs in mind, providing a convenient interface for selecting and ordering cakes.
     
